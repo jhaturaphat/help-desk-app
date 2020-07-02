@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.ng-invalid.ng-touched {
+    border-color: orangered;
+}
+
+
+.pop-table{    
+    width: 100%;
+}
+.pop-table td {
+    border-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding: 2px;
+}
+.pop-table tr:last-child td {    
+    border-bottom: 0;
+}
+.pop-table tr:hover {background-color: #ddd;}
+
+/* แก้ css ของ popup */
+:host >>> .popover-title {
+    background-color: #009688;
+    border: 1px solid  #009688;
+  }
+  :host >>> .popover {
+    border: 1px solid #009688;
+    color: #fff;
+  }
+  :host >>> .popover>.arrow:after {
+    border-top-color: #009688;
+  }
