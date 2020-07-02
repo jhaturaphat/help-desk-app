@@ -1,0 +1,148 @@
+<app-content>
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-envelope-o"></i> แจ้งซ่อม</h1>
+      <p>ค้นหารายการแล้วแจ้งซ่อม</p>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">แจ้งซ่อม</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="tile">
+        <h4 class="tile-title folder-head">ค้นหา อาคาร/สถานที่</h4>
+        <div class="tile-body">
+          <h4></h4>
+          <form
+            [formGroup]="forms"
+            (ngSubmit)="onSubmit()"
+            [noValidate]="false"
+          >
+            <div class="form-group">
+              <input
+                [(ngModel)]="searchLocation"
+                [typeahead]="locations$"
+                typeaheadOptionField="name"
+                [typeaheadAsync]="true"
+                (typeaheadOnSelect)="locationOnSelect($event)"
+                formControlName="location"
+                class="form-control"
+                type="text"
+                placeholder="ค้นหา สถานที่/อาคาร"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                [(ngModel)]="searchDepartment"
+                [typeahead]="department$"
+                typeaheadOptionField="name"
+                [typeaheadAsync]="true"
+                (typeaheadOnSelect)="departmentOnSelect($event)"
+                formControlName="department"
+                class="form-control"
+                type="text"
+                placeholder="ค้นหา แผนก"
+              />
+            </div>           
+            <div>
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa fa-search"></i>
+                ค้นหา
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+     <!-- รายการ -->
+    <div class="col-md-9">
+      <div class="tile">
+        <div class="mailbox-controls">
+          <div class="animated-checkbox">
+            <h4>รายการครุภัณฑ์คอมพิวเวตอร์</h4>
+          </div>
+        </div>
+        <div class="table-responsive mailbox-messages">
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngFor="let item of computerSupply">
+                <td>
+                  <a class="btn btn-sm btn-primary" (click)="onSenjob(item.id)"><i class="fa fa-wrench"></i></a>                  
+                </td>
+                <td>
+                  {{ item.device_id }}-{{ item.year }}-{{ item.location_id }}-{{
+                    item.department_id
+                  }}-{{ item.number }}
+                </td>
+                <td>{{ item.deviceinfo[0].name }}</td>
+                <td>{{ item.vender }}</td>
+                <td>{{ item.stock_id }}</td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.department }}</td>
+                <td>
+                  <tr *ngFor="let hdditem of item.storageinfo">
+                    {{
+                      hdditem.type
+                    }}
+                    {{
+                      hdditem.capacity
+                    }}
+                  </tr>
+                </td>
+                <td>{{ item.raminfo }}</td>
+                <!-- <td>{{item.osinfo}}</td> -->
+                <td>
+                  <!-- triggers="focus" -->
+                  <i
+                    class="fa fa-eye"
+                    [popover]="popTemplate"
+                    popoverTitle="{{ item.osinfo || item.deviceinfo[0].name }}"
+                    triggers="focus"
+                    tabindex="-1"
+                    placement="top right"
+                  ></i>
+                  
+                </td>
+                <ng-template #popTemplate>
+                  <div>
+                    <table class="pop-table">
+                      <tr *ngFor="let cpuitem of item.cpuinfo">
+                        <td>
+                          {{ cpuitem.vender }} {{ cpuitem.model }}
+                          {{ cpuitem.cpu_core }} {{ cpuitem.clock_speed }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>S/N: {{ item.serial_number }}</td>
+                      </tr>
+                      <tr>
+                        <td>ผู้ใช้: {{ item.member }}</td>
+                      </tr>
+                      <tr>
+                        <td>หมายเหตุ: {{ item.remark }}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <span class="text-muted mr-2">Showing 1-15 out of 60</span>
+          <div class="btn-group">
+            <button class="btn btn-primary btn-sm" type="button">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <button class="btn btn-primary btn-sm" type="button">
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-content>
