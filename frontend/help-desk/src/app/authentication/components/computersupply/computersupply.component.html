@@ -1,0 +1,276 @@
+<app-content>
+    <div class="app-title">
+        <div>
+            <h1>
+                <i class="fa fa-edit"></i> ลงทะเบียนสำรวจ
+            </h1>
+            <p>หน้าลงทะเบียน คอมพิวเตอร์ตั้งโต๊ะ และอื่นๆ</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">
+                <i class="fa fa-home fa-lg"></i>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="#">ลงทะเบียนสำรวจ</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tile">  
+                <!-- ส่วนฟอร์ม -->
+                <div class="tile-body">
+                    <form [formGroup]="forms" (ngSubmit)="onSubmit()" [noValidate]="false"> 
+                        <div class="row">
+                            <!-- ส่วนที่ 1 -->
+                            <div class="col-sm-3 right-edge">  
+                                <!-- ส่วนหัว 1 -->
+                                    <div class="tile-title-w-btn">
+                                        <h3 class="title">
+                                            <i class="fa fa-user"></i> ผู้ใช้
+                                        </h3>                    
+                                    </div>  
+                                <!-- ส่วนฟอร์ม 1  -->
+                                        <div class="form-group">
+                                            <label for="">สถานที่(อาคาร)</label>
+                                            <input type="text" 
+                                                    class="form-control" 
+                                                    formControlName="location"
+                                                    autocomplete="off"                                                                                              
+                                                    [(ngModel)]="locationSelected"         
+                                                    [typeahead]="location"   
+                                                    [typeaheadAsync]="true"                          
+                                                    (typeaheadOnSelect)=locationTypeaheadOnSelect($event)                                               
+                                                    typeaheadOptionField="name"
+                                                    placeholder="พิมพ์ค้นหา" 
+                                                    >
+                                            <input type="hidden" formControlName="location_id">                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">หน่วยงาน</label>
+                                            <input type="text" 
+                                            class="form-control"
+                                                    formControlName="department"
+                                                    autocomplete="off"                        
+                                                    [(ngModel)]="departmentSelected"                                               
+                                                    [typeahead]="department"  
+                                                    [typeaheadAsync]="true"
+                                                    (typeaheadOnSelect)=departmentTypeaheadOnSelect($event)                                               
+                                                    typeaheadOptionField="name"
+                                                    placeholder="พิมพ์ค้นหา"
+                                                    > 
+                                            <input type="hidden" formGroupName="department_id">
+                                        </div>
+                                    <div class="form-group">
+                                        <label for="">ผู้ใช้เครื่อง</label>
+                                        <input type="text"
+                                        class="form-control"
+                                        formControlName="member" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">ตำแหน่ง</label>
+                                        <input type="text" 
+                                                class="form-control"
+                                                formControlName="job_position"
+                                                autocomplete="off"                                                                                          
+                                                [(ngModel)]="positionSelected" 
+                                                [typeaheadAsync]="true"                                              
+                                                [typeahead]="position" 
+                                                (typeaheadOnSelect)=positionTypeaheadOnSelect($event)                                               
+                                                typeaheadOptionField="name"
+                                                placeholder="พิมพ์ค้นหา" 
+                                                >
+                                        <input type="hidden" formGroupName="job_position_id">
+                                    </div>
+                                                                 
+                            </div>
+                            <!-- ส่วนที่ 2 -->
+                            <div class="col-sm-3 right-edge">
+                                <!-- ส่วนหัว 2 -->
+                                <div class="tile-title-w-btn">
+                                    <h3 class="title">
+                                        <i class="fa fa-desktop"></i> iT Asset
+                                    </h3>                    
+                                </div> 
+                                 <!--ส่วนฟอร์ม 2  -->
+                                 <div class="form-group">
+                                    <label for="">ประเภท PC, Notebook, Printer, Other</label>
+                                    <select class="form-control" 
+                                    formControlName="deviceinfo"
+                                     (ngModelChange)="deviceSelected($event)" >
+                                        <option value="" disabled>---โปรดเลือก---</option>
+                                        <!-- <option *ngFor="let item of device" [ngValue]="item">{{item.name}}</option> -->
+                                        <option *ngFor="let item of deviceType" [ngValue]="item">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                
+                                 <div class="form-group">
+                                     <label for="">ปีที่รับเครื่อง</label>
+                                     <input type="text" class="form-control" formControlName="year" >
+                                 </div>                       
+                                <div class="form-group">
+                                    <label for="">Serial No.</label>
+                                    <input type="text" class="form-control" formControlName="serial_number" >
+                                </div>                               
+                                <div class="form-group">
+                                    <label for="">ผู้ผลิต หรือ รุ่นสินค้า</label>
+                                    <input type="text" class="form-control" formControlName="vender" >
+                                </div>                               
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="">เลขครุภัณฑ์</label>
+                                            <input type="text" class="form-control" formControlName="stock_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">เครื่องที่</label>
+                                            <input type="text" class="form-control" formControlName="number" >
+                                        </div> 
+                                    </div>
+                                </div>                                
+                            </div>
+
+                            <!-- ส่วนที่ 3 เครื่องคอมพิวเตอร์ -->
+                            <div class="col-sm-6">
+                                <!-- ส่วนหัว 3  -->
+                                <div class="tile-title-w-btn">
+                                    <h3 class="title">
+                                        <i class="fa fa-cogs"></i> รายละเอียดทางเทคนิค
+                                    </h3>                    
+                                </div> 
+                                <!-- ส่วนฟอร์ม 3 -->
+                                <section id="desktop" [ngClass]="{'hiden': deviceIsSelect}" >
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">รุ่น CPU</label>
+                                                <input type="text" class="form-control" autocomplete="off" class="form-control" 
+                                                        formControlName="cpuinfo"
+                                                        [(ngModel)]="cpuSelected"                                               
+                                                        [typeahead]="cpu"    
+                                                        (typeaheadOnSelect)=cpuTypeaheadOnSelect($event)                                               
+                                                        typeaheadOptionField="cpuinfo"
+                                                        placeholder="พิมพ์ค้นหา">
+                                                        <input type="hidden" formControlName="cpuinfo_id">
+                                            </div> 
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="title">รายการรุ่น CPU</label>
+                                            <ol>
+                                                <li *ngFor="let item of cpuList; let i = index">{{item.vender}} {{item.model}} {{item.cpu_core}} {{item.clock_speed}}
+                                                    <i class="fa fa-times remove" (click)="onCpuDelete(i)"></i>
+                                                </li>   
+                                            </ol>
+                                        </div>
+                                    </div>                              
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">HDD <i class="fa fa-hdd-o"></i></label>       
+                                                <input type="text" class="form-control" autocomplete="off" class="form-control" 
+                                                    formControlName="storageinfo"
+                                                    [(ngModel)]="hddSelected"                                               
+                                                    [typeahead]="hdd"  
+                                                    [typeaheadAsync]="true" 
+                                                    (typeaheadOnSelect)=hddTypeaheadOnSelect($event)                                               
+                                                    typeaheadOptionField="hddinfo"
+                                                    placeholder="พิมพ์ค้นหา"
+                                                    > 
+                                                    <input type="hidden" formControlName="storageinfo_id">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="title">รายการฮาร์ดดิส </label>
+                                            <ol>
+                                                <li *ngFor="let item of hddList; let i = index"> {{item.type}} {{item.capacity}} 
+                                                    <i class="fa fa-times remove" (click)="onHddDelete(i)"></i>
+                                                </li>                                            
+                                            </ol>
+                                        </div>
+                                    </div>    
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">RAM</label>
+                                                <input type="text" class="form-control" autocomplete="off" class="form-control"
+                                                            formControlName="raminfo"
+                                                            [(ngModel)]="ramSelected"             
+                                                            [typeahead]="ram"   
+                                                            [typeaheadAsync]="true"
+                                                            (typeaheadOnSelect)=ramTypeaheadOnSelect($event)                                               
+                                                            typeaheadOptionField="raminfo"
+                                                            placeholder="พิมพ์ค้นหา"
+                                                            >
+                                                <input type="hidden" formControlName="raminfo_id">
+                                            </div> 
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="">VGA</label>
+                                                <input type="text" class="form-control" autocomplete="off" class="form-control" 
+                                                formControlName="vgainfo"
+                                                [(ngModel)]="vgaSelected"                                               
+                                                [typeahead]="vga" 
+                                                [typeaheadAsync]="true"
+                                                (typeaheadOnSelect)=vgaTypeaheadOnSelect($event)                                               
+                                                typeaheadOptionField="vgainfo"
+                                                placeholder="พิมพ์ค้นหา"
+                                                >
+                                                <input type="hidden" formControlName="vgainfo_id">
+                                            </div> 
+                                        </div>
+                                    </div>                                
+                                    <div class="form-group">
+                                        <label for="">OS (ระบบปฏิบัติการ)</label>
+                                        <input type="text" autocomplete="off" class="form-control" 
+                                                    formControlName="osinfo"
+                                                    [(ngModel)]="osSelected"                                               
+                                                    [typeahead]="os"  
+                                                    [typeaheadAsync]="true"
+                                                    (typeaheadOnSelect)=osTypeaheadOnSelect($event)                                               
+                                                    typeaheadOptionField="os_ver"
+                                                    placeholder="พิมพ์ค้นหา"
+                                                    >
+                                            <input type="hidden" formControlName="osinfo_id">
+                                    </div>
+                                </section>                                 
+                                                        
+                                                              
+                                <div class="form-group" [ngClass]="{hiden: printerIsSelected}">
+                                    <label for="">ประเภท สี,ขาว-ดำ, อื่นๆ</label>
+                                    <select class="form-control" formControlName="printer_id" >
+                                        <option value="">---โปรดเลือก---</option>
+                                        <option *ngFor="let item of printerType" value="{{item.id}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">หมายเหตุ</label>
+                                    <textarea class="form-control" rows="3" placeholder="หมายเหตุ" formControlName="remark"></textarea>
+                                </div> 
+                            </div>
+                            <!-- ส่วนที่ 4 -->
+                            <!-- <div class="col-sm-3"></div> -->
+                        </div> 
+
+                        <hr>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" *ngIf="buttonSubmit">
+                                <i class="fa fa-save"></i>  
+                                บันทึกข้อมูล
+                                
+                            </button>    
+                            <button type="submit" class="btn btn-primary" *ngIf="!buttonSubmit">
+                                <i class="fa fa-edit"></i>  
+                                อัพเดทข้อมูล
+                            </button>                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</app-content>

@@ -1,0 +1,66 @@
+<app-content>
+    <div class="app-title">
+        <div>
+            <h1>
+                <i class="fa fa-edit"></i> รายการทรัพสิน
+            </h1>
+            <p>หน้ารายการทรัพสิน คอมพิวเตอร์ตั้งโต๊ะ และอื่นๆ</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">
+                <i class="fa fa-home fa-lg"></i>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="#">รายการทรัพสิน</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="tile">
+            <div class="tile-body">
+                <div class="row">
+                    <div class="col-sm-12">
+
+
+                        <table class="table">
+                            <tr *ngFor="let item of itasset">
+                                <td>{{item.device_id}}-{{item.year}}-{{item.location_id}}-{{item.department_id}}-{{item.number}}</td>                                
+                                <td>{{item.deviceinfo[0].name}}</td>
+                                <td>{{item.vender}}</td>
+                                <td>{{item.stock_id}}</td>
+                                <td>{{item.location}}</td>
+                                <td>{{item.department}}</td>
+                                <td>
+                                    <tr *ngFor="let hdditem of item.storageinfo">{{hdditem.type}} {{hdditem.capacity}}</tr>
+                                </td>                                
+                                <td>{{item.raminfo}}</td>
+                                <!-- <td>{{item.osinfo}}</td> -->
+                                <td>            
+                                    <!-- triggers="focus" -->
+                                    <i class="fa fa-eye" [popover]="popTemplate" popoverTitle="{{item.osinfo || item.deviceinfo[0].name}}" 
+                                    triggers="focus"  tabindex="-1" placement="top right"></i> 
+                                    | <i class="fa fa-ambulance"></i> 
+                                    | <i class="fa fa-edit" (click)="onEdit(item)"></i> 
+                                    | <i class="fa fa-trash-o" (click)="onDelete(item)"></i>
+                                </td>
+                                <ng-template #popTemplate>
+                                    <div>
+                                        <table class="pop-table">
+                                            <tr *ngFor="let cpuitem of item.cpuinfo">
+                                                <td>{{cpuitem.vender}} {{cpuitem.model}} {{cpuitem.cpu_core}} {{cpuitem.clock_speed}}</td>
+                                            </tr>
+                                            <tr><td>S/N: {{item.serial_number}}</td></tr>
+                                            <tr><td>ผู้ใช้: {{item.member}}</td></tr>
+                                            <tr><td>หมายเหตุ: {{item.remark}}</td></tr>
+                                        </table>
+                                    </div>
+                                </ng-template> 
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-content>
+
