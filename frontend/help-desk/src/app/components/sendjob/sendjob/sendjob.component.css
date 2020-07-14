@@ -24,3 +24,8 @@
   :host >>> .popover>.arrow:after {
     border-top-color: #009688;
   }
+
+  /* Modal */
+  .modal-header{
+    background-color: #009688;
+  }

@@ -10,8 +10,10 @@ import { RouterModule } from '@angular/router';
 
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AlertService } from './services/alert.service';
+import { from } from 'rxjs';
 
 
 @NgModule({    
@@ -27,6 +29,7 @@ import { AlertService } from './services/alert.service';
     RouterModule,
     TypeaheadModule.forRoot(),
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     PopoverModule.forRoot()
   ],
   exports: [

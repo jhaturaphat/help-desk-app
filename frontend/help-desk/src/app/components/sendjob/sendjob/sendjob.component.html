@@ -70,7 +70,7 @@
             <tbody>
               <tr *ngFor="let item of computerSupply">
                 <td>
-                  <a class="btn btn-sm btn-primary" (click)="onSenjob(item.id)"><i class="fa fa-wrench"></i></a>                  
+                  <a class="btn btn-sm btn-primary" (click)="openModal(template, item)"><i class="fa fa-wrench"></i></a>                  
                 </td>
                 <td>
                   {{ item.device_id }}-{{ item.year }}-{{ item.location_id }}-{{
@@ -145,4 +145,37 @@
       </div>
     </div>
   </div>
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
 </app-content>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">แจ้งอาการเสีย</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-sm-12">
+      <div class="tile-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <label for="" class="col-form-label col-form-label-lg">อาการเสีย</label>
+            <textarea class="form-control" rows="10"></textarea>
+            <br>
+          </div>
+          
+            <div class="form-group col-sm-6">
+              <label for="">ผู้แจ้งซ่อม</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="">ผู้แจ้งซ่อม</label>
+              <input type="text" class="form-control">
+            </div>          
+        </div>
+      </div>
+  </div>
+  </div>
+</ng-template>

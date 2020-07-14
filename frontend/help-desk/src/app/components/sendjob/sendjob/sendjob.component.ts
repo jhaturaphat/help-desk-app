@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { Observable, of, noop } from 'rxjs';
+import { Observable, of, noop, from } from 'rxjs';
 import { SendJobService, ILocation } from 'src/app/services/senjob.service';
 import { switchMap} from 'rxjs/operators';
 import { IComputer, IPosition, IDepartment } from 'src/app/authentication/components/computersupply/computersupply.interfaces';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { AlertService } from 'src/app/shareds/services/alert.service';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal'
 
 @Component({
   selector: 'app-sendjob',
@@ -13,7 +14,7 @@ import { AlertService } from 'src/app/shareds/services/alert.service';
   styleUrls: ['./sendjob.component.css']
 })
 export class SendjobComponent implements OnInit {
-
+  modalRef: BsModalRef;
   searchLocation: string;
   searchDepartment: string;
   locations$:Observable<any>;
@@ -27,11 +28,12 @@ export class SendjobComponent implements OnInit {
   constructor(
     private builder:FormBuilder,
     private sendJopService:SendJobService,
-    private alert:AlertService
+    private alert:AlertService,
+    private modalService: BsModalService
   ) {
     this.initialCreateFormData();  
     
-    //๒๒๒๒๒๒๒๒๒๒๒๒๒๒๒๒๒
+    //
     this.sendJopService.getItAssetByLoation("21")
    .then((res)=>{
      this.computerSupply = res;    
@@ -44,6 +46,10 @@ export class SendjobComponent implements OnInit {
    }
 
   forms: FormGroup;
+
+  openModal(template: TemplateRef<any>, item: IComputer) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));    
+  }
 
   ngOnInit() {
 
