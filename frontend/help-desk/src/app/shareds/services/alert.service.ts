@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 declare const $:any;
+declare const swal: any;
 
 @Injectable()
 
@@ -53,6 +54,17 @@ export class AlertService {
 
     someting_wrong(message:string = 'ข้อมูลบางอย่างไม่ถูกต้อง กรุณาตรวจสอบ'){
         this.notify(message);
+    }
+
+    // แจ้งเตือนยืนยันการทำรายการ
+    confirm(message: string = 'คุณต้องการจะทำรายการต่อไปหรือไม่?'): Promise<any> {
+        return swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
     }
 
 }

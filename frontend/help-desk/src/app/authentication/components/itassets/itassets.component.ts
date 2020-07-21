@@ -39,13 +39,17 @@ export class ItassetsComponent implements OnInit {
   }
 
   onDelete(item:any):void{
-    this.itassetsService.deleteItem(item.id).subscribe(result => {
-      this.ngOnInit();   
-      this.alertService.notify(result['message'], 'success');
-    },(err)=>{
-      this.alertService.someting_wrong();
-      console.log(err);      
+    this.alertService.confirm().then(status => {
+      if(!status) return;      
+        this.itassetsService.deleteItem(item.id).subscribe(result => {
+          this.ngOnInit();   
+          this.alertService.notify(result['message'], 'success');
+        },(err)=>{
+          this.alertService.someting_wrong();
+          console.log(err);      
+        });
     });
+    
   }
 
 }
