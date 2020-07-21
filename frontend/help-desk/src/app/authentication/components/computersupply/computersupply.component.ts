@@ -185,7 +185,7 @@ export class ComputersupplyComponent implements OnInit {
                     
         },
         (err) => {
-          this.alertService.someting_wrong(err.message);
+          this.alertService.someting_wrong(err.Message);
           console.log(err);
         }
       );
@@ -198,7 +198,7 @@ export class ComputersupplyComponent implements OnInit {
           this.router.navigate(['/',AppURL.Authen, AuthURL.Itassets]); 
         },
         (err) => {
-          this.alertService.someting_wrong(err.message);
+          this.alertService.someting_wrong(err.Message);
           console.log(err);
         }
       );
