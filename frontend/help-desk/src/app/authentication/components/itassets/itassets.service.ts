@@ -26,6 +26,9 @@ export class itassetsService{
     getItasset(id?:string){
         return this.http.get<IItasset[]>(this.backendURL+"/itassets",{params:{id}});    
     }
+    async getTotalItems(){
+        return await this.http.get(this.backendURL+"/itassets/count").toPromise();
+    }
 
     deleteItem(id:any){        
         return this.httpService.requestDelete('/itassets',id,this.authService.getAuthenticated());
