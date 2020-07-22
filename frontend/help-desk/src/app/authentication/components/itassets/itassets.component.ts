@@ -34,9 +34,9 @@ export class ItassetsComponent implements OnInit {
     
   }
 
-  public getItemsPerPage():void{
+  public getItemsPerPage(page:any = 0, itemsPerPage:any = this.itemsPerPage):void{
     this.itassetsService
-      .getItassets(0, this.itemsPerPage)
+      .getItassets(page, itemsPerPage)
       .then((result) => {
         this.itasset = result;     
       })
@@ -79,8 +79,8 @@ export class ItassetsComponent implements OnInit {
   }
 
 //   pagination 
-public pageChanged(event:any):void{
-    console.log(event);    
+public pageChanged(event:any):void{       
+    this.getItemsPerPage((event.page - 1)*this.itemsPerPage, this.itemsPerPage);    
 }
 
 }

@@ -23,8 +23,7 @@
 
 
                         <table class="table">
-                            <tr *ngFor="let item of itasset; let i = index">
-                                <td>{{i+1}}</td>
+                            <tr *ngFor="let item of itasset">                                
                                 <td>{{item.device_id}}-{{item.year}}-{{item.location_id}}-{{item.department_id}}-{{item.number}}</td>                                
                                 <td>{{item.deviceinfo[0].name}}</td>
                                 <td>{{item.vender}}</td>
