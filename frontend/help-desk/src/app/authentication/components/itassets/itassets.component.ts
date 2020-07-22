@@ -18,10 +18,10 @@ export class ItassetsComponent implements OnInit {
     private alertService: AlertService
   ) {}
 
-  limitPage: number = 15;
+  itemsPerPage: number = 15;
   totalItems:number = 0;
   currentPage:number = 1;
-  maxSize = 15;
+  maxSize = 6;
   rotate = true;
 
   AppURL = AppURL;
@@ -29,14 +29,28 @@ export class ItassetsComponent implements OnInit {
   itasset: IItasset[] = [];
 
   ngOnInit() {
+    this.getTotalItems(); 
+    this.getItemsPerPage();
+    
+  }
+
+  public getItemsPerPage():void{
     this.itassetsService
-      .getItassets()
+      .getItassets(0, this.itemsPerPage)
       .then((result) => {
-        this.itasset = result;
-        this.totalItems = this.itasset.length;
-        //console.log(result);
+        this.itasset = result;     
       })
       .catch((err) => {
+        this.alertService.notify(err.error);
+      });
+  }
+
+  public getTotalItems():void{
+    this.itassetsService.getTotalItems()
+    .then((result:any) => {
+        this.totalItems = result.totalItem;
+    })
+    .catch((err) => {
         this.alertService.notify(err.error);
       });
   }
@@ -66,8 +80,7 @@ export class ItassetsComponent implements OnInit {
 
 //   pagination 
 public pageChanged(event:any):void{
-    console.log(event);
-    
+    console.log(event);    
 }
 
 }
