@@ -9,8 +9,4 @@ export const AppURL = {
 
 export const BackendURL = environment.api_url;
 
-//export const BackendURL = "http://localhost/help-desk-api/index.php?r=/api";
-
-//export const BackendURL = "http://192.168.231.222/help-desk-api/backend/index.php?r=/api"; 
-
 //  ng build --prod --base-href /help-desk-api/

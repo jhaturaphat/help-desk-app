@@ -47,9 +47,7 @@ export class SendjobComponent implements OnInit {
 
   forms: FormGroup;
 
-  openModal(template: TemplateRef<any>, item: IComputer) {
-    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));    
-  }
+ 
 
   ngOnInit() {
 
@@ -76,6 +74,10 @@ export class SendjobComponent implements OnInit {
            return of([]);    
        })
      );   
+  }
+
+  openModal(template: TemplateRef<any>, item: IComputer) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));    
   }
 
   locationOnSelect(e:TypeaheadMatch):void{
