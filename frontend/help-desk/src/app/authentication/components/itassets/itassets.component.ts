@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { itassetsService } from "./itassets.service";
-import { IItasset } from "./itassets.interface";
+import { IItasset, IMemberSearchKey } from "./itassets.interface";
 import { Router } from "@angular/router";
 import { AppURL } from "src/app/app.url";
 import { AuthURL } from "../../authentication.url";
@@ -16,7 +16,9 @@ export class ItassetsComponent implements OnInit {
     private itassetsService: itassetsService,
     private router: Router,
     private alertService: AlertService
-  ) {}
+  ) {
+    this.serachType = this.searchTypeItems[1];
+  }
 
   itemsPerPage: number = 15;
   totalItems:number = 0;
@@ -28,9 +30,26 @@ export class ItassetsComponent implements OnInit {
   AuthURL = AuthURL;
   itasset: IItasset[] = [];
 
+  // ตัวแปรสำหรับค้นหา
+  searchText: string = '';
+  serachType: IMemberSearchKey;
+  searchTypeItems: IMemberSearchKey[] = [
+      { key: 'id', value: 'ค้นหาจากรหัส' },
+      { key: 'serial_number', value: 'ค้นหาจากซีเรียล' },
+      { key: 'device_id', value: 'ค้นหาจากประเภท' },
+      { key: 'location_id', value: 'ค้นหาจากสถานที่' },
+      { key: 'department_id', value: 'ค้นหาจากหน่วยงาน' }
+  ];
+
   ngOnInit() {
     this.getTotalItems(); 
     this.getItemsPerPage();
+    
+  }
+
+  // ค้นหา
+  public onSearchItem():void{
+    console.log(this.serachType);
     
   }
 
@@ -63,12 +82,13 @@ export class ItassetsComponent implements OnInit {
   }
 
   onDelete(item: any): void {
-    this.alertService.confirm().then((status) => {
-      if (!status) return;
+    this.alertService.confirm().then((status) => {  
+      if (!status.value) return;
+
       this.itassetsService.deleteItem(item.id).subscribe(
         (result) => {
-          this.ngOnInit();
-          this.alertService.notify(result["message"], "success");
+          this.ngOnInit();         
+         this.alertService.Toast();
         },
         (err) => {
           this.alertService.someting_wrong();

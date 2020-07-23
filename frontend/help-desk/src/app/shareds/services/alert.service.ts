@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
+import Swal from 'sweetalert2';
 
 declare const $:any;
-declare const swal: any;
 
 @Injectable()
 
@@ -56,15 +56,36 @@ export class AlertService {
         this.notify(message);
     }
 
+    Toast(){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          });
+                    
+          Toast.fire({
+            icon: 'success',
+            title: 'ทำรายการสำเร็จ'
+          })
+    }
+
     // แจ้งเตือนยืนยันการทำรายการ
     confirm(message: string = 'คุณต้องการจะทำรายการต่อไปหรือไม่?'): Promise<any> {
-        return swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
+        return Swal.fire({
+            title:'คุณแน่ใจ',
+            text:message,
+            icon:'warning',
+            showCancelButton:true,
+            confirmButtonColor:'#3085d6',
+            cancelButtonColor:'#d33',
+            confirmButtonText:'ใช่, ต้องการลบรายการนี้'
+        });
     }
 
 }

@@ -50,3 +50,8 @@ export interface IItasset {
     type: string;
     capacity: string;
   }
+
+  export interface IMemberSearchKey {
+    key: string;
+    value: string;
+}
