@@ -8,8 +8,10 @@ import { ContentComponent } from 'src/app/shareds/components/content/content.com
 //import { NavbarComponent } from "src/app/shareds/components/navbar/navbar.component"
 import { RouterModule } from '@angular/router';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AlertService } from './services/alert.service';
 
@@ -25,8 +27,10 @@ import { AlertService } from './services/alert.service';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     PopoverModule.forRoot()
   ],
   exports: [
@@ -36,6 +40,7 @@ import { AlertService } from './services/alert.service';
     NavbarComponent, 
     SidebarComponent, 
     ContentComponent,
+    PaginationModule,
     TypeaheadModule,
     BsDropdownModule,
     PopoverModule

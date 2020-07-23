@@ -16,6 +16,7 @@ $routes['/api/deviceinfo']['GET']            = './apps/info/deviceinfo/get.php';
 $routes['/api/printerinfo']['GET']           = './apps/info/printerinfo/get.php'; 
 
 $routes['/api/itassets']['GET']              = './apps/it-assets/get.php';
+$routes['/api/itassets/count']['GET']        = './apps/it-assets/count.php';
 $routes['/api/itassets']['POST']             = './apps/it-assets/post.php';
 $routes['/api/itassets']['PUT']              = './apps/it-assets/put.php';
 $routes['/api/itassets']['DELETE']           = './apps/it-assets/delete.php';

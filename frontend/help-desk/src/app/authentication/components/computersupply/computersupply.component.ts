@@ -185,7 +185,7 @@ export class ComputersupplyComponent implements OnInit {
                     
         },
         (err) => {
-          this.alertService.someting_wrong(err.message);
+          this.alertService.someting_wrong(err.Message);
           console.log(err);
         }
       );
@@ -198,7 +198,7 @@ export class ComputersupplyComponent implements OnInit {
           this.router.navigate(['/',AppURL.Authen, AuthURL.Itassets]); 
         },
         (err) => {
-          this.alertService.someting_wrong(err.message);
+          this.alertService.someting_wrong(err.Message);
           console.log(err);
         }
       );
@@ -232,8 +232,6 @@ export class ComputersupplyComponent implements OnInit {
       setTimeout(()=> {
         this.initialUpdateFormData();  //อัพเเดทข้อมูลใส่ฟอร์มหลังจาก 2 วินาที
       },300); 
-   
-       
 
     // ดึงข้อมูลสถานที่
     this.location = Observable.create((observer: any) => {      
@@ -260,6 +258,7 @@ export class ComputersupplyComponent implements OnInit {
           }
         })      
     );
+    
     // ดึงข้อมูลหน่วยงาน
     this.department = new Observable((observer: any) => {
       observer.next(this.departmentSelected);

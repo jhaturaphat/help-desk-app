@@ -19,12 +19,15 @@ export class itassetsService{
         ) { }
 
     private backendURL = BackendURL;
-
-    async getItassets(){
-        return await this.http.get(this.backendURL+"/itassets").toPromise() as Promise<IItasset[]>;    
+    
+    async getItassets(page?:any, itemsPerPage?:any){
+        return await this.http.get(this.backendURL+"/itassets",{params:{page, itemsPerPage}}).toPromise() as Promise<IItasset[]>;    
     }
     getItasset(id?:string){
         return this.http.get<IItasset[]>(this.backendURL+"/itassets",{params:{id}});    
+    }
+    async getTotalItems(){
+        return await this.http.get(this.backendURL+"/itassets/count").toPromise();
     }
 
     deleteItem(id:any){        

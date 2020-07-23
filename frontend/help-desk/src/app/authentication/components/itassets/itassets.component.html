@@ -21,9 +21,34 @@
                 <div class="row">
                     <div class="col-sm-12">
 
+                        <!-- ค้นหา -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend" dropdown>
+                                <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">                                    
+                                    <span class="caret">{{serachType.value}}</span>
+                                </button>
+                                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                                    <li *ngFor="let item of searchTypeItems">
+                                        <a class="dropdown-item" (click)="serachType = item">{{item.value}}</a>
+                                    </li>                                    
+                                </ul>
+                            </div>
+
+                            <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="คำค้น">
+
+                            <div class="input-group-append">
+                                <button (click)="onSearchItem()" class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data table -->
 
                         <table class="table">
-                            <tr *ngFor="let item of itasset">
+                            <tr *ngFor="let item of itasset">                                
                                 <td>{{item.device_id}}-{{item.year}}-{{item.location_id}}-{{item.department_id}}-{{item.number}}</td>                                
                                 <td>{{item.deviceinfo[0].name}}</td>
                                 <td>{{item.vender}}</td>
@@ -56,8 +81,19 @@
                                     </div>
                                 </ng-template> 
                             </tr>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="7">
+                                        จำนวนทั้งหมด {{totalItems}} รายการ
+                                    </th>
+                                </tr>
+                            </tfoot>
                         </table>
+                        <!-- pagegination -->                    
+                        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [rotate]="rotate" [maxSize]="maxSize" 
+                        (pageChanged)="pageChanged($event)" [itemsPerPage]="itemsPerPage"></pagination>                    
                     </div>
+                    
                 </div>
             </div>
         </div>
