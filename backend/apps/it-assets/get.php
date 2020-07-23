@@ -20,17 +20,18 @@ FROM
 
 if (isset($_GET['id'])) { //ถ้าส่ง ID มา
   $sql .= 	" WHERE assets.id =".$_GET['id'];
-}else if(isset($_GET['location_id'])){  //ถ้าส่ง location_id มา  
+}elseif(isset($_GET['location_id'])){  //ถ้าส่ง location_id มา  
   $sql .= 	" WHERE assets.location_id =".$_GET['location_id'];  
-}else if(isset($_GET['location_id']) && isset($_GET['department_id'])){
-  $sql .= 	" WHERE assets.location_id = ".$_GET['location_id']." AND assets.department_id = ".$_GET['department_id'];  
+}elseif(isset($_GET['department_id'])){
+  $sql .= 	" WHERE assets.department_id =".$_GET['department_id'];  
+}elseif(isset($_GET['location_id']) && isset($_GET['department_id'])){
+  $sql .=   " WHERE assets.location_id = ".$_GET['location_id']." AND assets.department_id = ".$_GET['department_id'];  
 }
 
 // สำหรับ pagination
 if(isset($_GET['page']) && ($_GET['page'] != 'undefined')){
   $sql .= " LIMIT ".$_GET['page'].", ".$_GET['itemsPerPage']."";
 }
-
 
 
 $json = [];

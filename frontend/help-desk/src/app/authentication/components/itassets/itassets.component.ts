@@ -49,8 +49,7 @@ export class ItassetsComponent implements OnInit {
 
   // ค้นหา
   public onSearchItem():void{
-    console.log(this.serachType);
-    
+    console.log(this.serachType);    
   }
 
   public getItemsPerPage(page:any = 0, itemsPerPage:any = this.itemsPerPage):void{
