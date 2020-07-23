@@ -28,11 +28,20 @@ if (isset($_GET['id'])) { //ถ้าส่ง ID มา
   $sql .=   " WHERE assets.location_id = ".$_GET['location_id']." AND assets.department_id = ".$_GET['department_id'];  
 }
 
+//ค้นหา
+if(isset($_GET['searchType'])){
+  if($_GET['searchType'] == 'department_id') $sql .= 	" WHERE department.name LIKE '%".$_GET['searchText']."%'";  
+  elseif($_GET['searchType'] == 'serial_number') $sql .= 	" WHERE assets.serial_number LIKE '%".$_GET['searchText']."%'";  
+  elseif($_GET['searchType'] == 'device_id') $sql .= 	" WHERE deviceinfo.name LIKE '%".$_GET['searchText']."%'";    
+  elseif($_GET['searchType'] == 'location_id') $sql .= 	" WHERE location.name LIKE '%".$_GET['searchText']."%'";  
+}
+
 // สำหรับ pagination
 if(isset($_GET['page']) && ($_GET['page'] != 'undefined')){
   $sql .= " LIMIT ".$_GET['page'].", ".$_GET['itemsPerPage']."";
 }
 
+// echo $sql;
 
 $json = [];
 $query = mysqli_query($database, $sql);
