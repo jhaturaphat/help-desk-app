@@ -47,9 +47,26 @@ export class ItassetsComponent implements OnInit {
     
   }
 
+  //   pagination 
+  public pageChanged(event:any):void{       
+    if(this.searchText){
+      this.getTotalItems(); 
+      this.onSearchItem((event.page - 1)*this.itemsPerPage, this.itemsPerPage);
+      return;
+    }
+    this.getItemsPerPage((event.page - 1)*this.itemsPerPage, this.itemsPerPage);    
+  }
+
   // ค้นหา
-  public onSearchItem():void{
-    this.itassetsService.search(this.serachType.key, this.searchText.trim());    
+  public onSearchItem(page:any = 0, itemsPerPage:any = this.itemsPerPage):void{
+    this.itassetsService.search(this.serachType.key, this.searchText.trim())
+    .then((result)=> {
+      this.itasset = result;
+      this.totalItems = result.length;
+    })
+    .catch((err) => {
+      this.alertService.notify(err.error);
+    });  
   }
 
   public getItemsPerPage(page:any = 0, itemsPerPage:any = this.itemsPerPage):void{
@@ -96,10 +113,5 @@ export class ItassetsComponent implements OnInit {
       );
     });
   }
-
-//   pagination 
-public pageChanged(event:any):void{       
-    this.getItemsPerPage((event.page - 1)*this.itemsPerPage, this.itemsPerPage);    
-}
 
 }

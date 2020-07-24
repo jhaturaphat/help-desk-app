@@ -34,7 +34,9 @@ export class itassetsService{
         return this.httpService.requestDelete('/itassets',id,this.authService.getAuthenticated());
     }
 
-    async search(searchType:any, searchText:string){
-        return await this.http.get(this.backendURL+"/itassets",{params:{searchType, searchText}}).toPromise() as Promise<IItasset[]>;
+    async search(searchType:any, searchText:string, page?:any, itemsPerPage?:any){
+        return await this.http.get(this.backendURL+"/itassets",
+        {params:{searchType, searchText}})
+        .toPromise() as Promise<IItasset[]>;
     }
 }

@@ -68,8 +68,8 @@ if ($result) {
 
         //สร้างรูปแบบข้อมูล JSON DATA
         $json[] = array_merge($result[$index], $deviceinfo, $storageinfo, $cpuinfo);
-
-    }    
+        
+    } 
     echo json_encode($json);
 }else{     
     http_response_code(404);

@@ -30,7 +30,7 @@
                                 </button>
                                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                                     <li *ngFor="let item of searchTypeItems">
-                                        <a class="dropdown-item" (click)="serachType = item">{{item.value}}</a>
+                                        <a class="dropdown-item" (click)="serachType = item; searchText=''">{{item.value}}</a>
                                     </li>                                    
                                 </ul>
                             </div>
