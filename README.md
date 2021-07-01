@@ -1,3 +1,3 @@
 # help-desk-app
-
-upload new
+ รัน backend ใช้ php -S localhost:9000
+ รัน fontend ใช้ ng serve
