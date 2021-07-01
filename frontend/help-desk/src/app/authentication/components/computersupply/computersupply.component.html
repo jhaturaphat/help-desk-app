@@ -39,7 +39,8 @@
                                                     autocomplete="off"                                                                                              
                                                     [(ngModel)]="locationSelected"         
                                                     [typeahead]="location"   
-                                                    [typeaheadAsync]="true"                          
+                                                    [typeaheadAsync]="true"   
+                                                    [typeaheadMinLength]="0"                       
                                                     (typeaheadOnSelect)=locationTypeaheadOnSelect($event)                                               
                                                     typeaheadOptionField="name"
                                                     placeholder="พิมพ์ค้นหา" 
@@ -55,6 +56,7 @@
                                                     [(ngModel)]="departmentSelected"                                               
                                                     [typeahead]="department"  
                                                     [typeaheadAsync]="true"
+                                                    [typeaheadMinLength]="0"
                                                     (typeaheadOnSelect)=departmentTypeaheadOnSelect($event)                                               
                                                     typeaheadOptionField="name"
                                                     placeholder="พิมพ์ค้นหา"
@@ -76,6 +78,7 @@
                                                 [(ngModel)]="positionSelected" 
                                                 [typeaheadAsync]="true"                                              
                                                 [typeahead]="position" 
+                                                [typeaheadMinLength]="0"
                                                 (typeaheadOnSelect)=positionTypeaheadOnSelect($event)                                               
                                                 typeaheadOptionField="name"
                                                 placeholder="พิมพ์ค้นหา" 
@@ -149,7 +152,8 @@
                                                 <input type="text" class="form-control" autocomplete="off" class="form-control" 
                                                         formControlName="cpuinfo"
                                                         [(ngModel)]="cpuSelected"                                               
-                                                        [typeahead]="cpu"    
+                                                        [typeahead]="cpu"  
+                                                        [typeaheadMinLength]="0"  
                                                         (typeaheadOnSelect)=cpuTypeaheadOnSelect($event)                                               
                                                         typeaheadOptionField="cpuinfo"
                                                         placeholder="พิมพ์ค้นหา">
@@ -174,6 +178,7 @@
                                                     [(ngModel)]="hddSelected"                                               
                                                     [typeahead]="hdd"  
                                                     [typeaheadAsync]="true" 
+                                                    [typeaheadMinLength]="0"
                                                     (typeaheadOnSelect)=hddTypeaheadOnSelect($event)                                               
                                                     typeaheadOptionField="hddinfo"
                                                     placeholder="พิมพ์ค้นหา"
@@ -199,6 +204,7 @@
                                                             [(ngModel)]="ramSelected"             
                                                             [typeahead]="ram"   
                                                             [typeaheadAsync]="true"
+                                                            [typeaheadMinLength]="0"
                                                             (typeaheadOnSelect)=ramTypeaheadOnSelect($event)                                               
                                                             typeaheadOptionField="raminfo"
                                                             placeholder="พิมพ์ค้นหา"
@@ -214,6 +220,7 @@
                                                 [(ngModel)]="vgaSelected"                                               
                                                 [typeahead]="vga" 
                                                 [typeaheadAsync]="true"
+                                                [typeaheadMinLength]="0"
                                                 (typeaheadOnSelect)=vgaTypeaheadOnSelect($event)                                               
                                                 typeaheadOptionField="vgainfo"
                                                 placeholder="พิมพ์ค้นหา"
@@ -229,6 +236,7 @@
                                                     [(ngModel)]="osSelected"                                               
                                                     [typeahead]="os"  
                                                     [typeaheadAsync]="true"
+                                                    [typeaheadMinLength]="0"
                                                     (typeaheadOnSelect)=osTypeaheadOnSelect($event)                                               
                                                     typeaheadOptionField="os_ver"
                                                     placeholder="พิมพ์ค้นหา"
