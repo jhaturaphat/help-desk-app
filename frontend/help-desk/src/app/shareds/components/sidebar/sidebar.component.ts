@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.Member = this.memberService.UserLogin;   
+    console.log(this.Member);
       
     if(this.Member.premission == this.Roles['1'])   {
       console.log(this.Member);
