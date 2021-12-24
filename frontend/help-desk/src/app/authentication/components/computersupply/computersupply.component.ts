@@ -81,6 +81,8 @@ export class ComputersupplyComponent implements OnInit {
     private alertService: AlertService,
     private memberService:MemberService
   ) {
+
+    //รับค่าตัวแปรจาก Component อื่น
     this.assetsItems = this.router.getCurrentNavigation().extras.state as IItasset;
     console.log(this.assetsItems);
     
