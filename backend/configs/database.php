@@ -3,7 +3,7 @@
 
 $host       = '127.0.0.1';
 $user       = 'root';
-$password   = '123456';
+$password   = '';
 $dbname     = 'help_desk';
 $database   = mysqli_connect($host, $user, $password, $dbname);
 mysqli_set_charset($database,"utf8");
